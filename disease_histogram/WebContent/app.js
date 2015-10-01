@@ -5,25 +5,33 @@ BSVE.init(function()
 
     BSVE.api.search.submit(function(query)
     {
-        /*
-        var filter = encodeURI('dateTime ge ' + query.startDate + ' and dateTime le ' + query.endDate );
-        BSVE.api.datasource.query( 'PON', filter, null, null, function(response)
-        {
-            reqId = response;
-            BSVE.api.datasource.result(response, onComplete, onError);
-        }, onError );
-
-        $('h3.msg').html( 'Loading...' ).show();
+        if(!query.term) {
+            return $('h3.msg').html('A query term is required');
+        }
         $('#container').hide().html('');
-        _title = 'PON: ' + query.startDate + ' - ' + query.endDate;
-        */
-        $('#container').hide().html('');
-        $.getJSON('data.json', function(resp){
+        var params = {
+            term: query.term
+        };
+        if(query.startDate) params.fromDate = query.startDate;
+        if(query.endDate) params.toDate = query.endDate;
+        if(query.locations.length > 0) {
+            params.locations = query.locations.map(function(lob){
+                return {
+                    location: lob.location,
+                    locationType: lob.locationType
+                };
+            });
+        }
+        $.ajax({
+            method: "POST",
+            url: "https://grits-dev.ecohealth.io/api/v1/bsve/search",
+            data: JSON.stringify(params)
+        }).then(function(resp){
             plotChart(resp.results);
             $('h3.msg').hide();
             $('#container').fadeIn();
         });
-    }, true, false, true);
+    }, false, false, false);
 
     function onComplete(response)
     {
@@ -141,7 +149,11 @@ BSVE.init(function()
                                         }),
                                     $('<ul>').append(
                                         this.results.map(function(result){
-                                            return $('<li>').html('<pre>' + JSON.stringify(result, 0, 2) + '</pre>');
+                                            return $('<li>').html(
+                                                '<pre>' +
+                                                JSON.stringify(result, 0, 2) +
+                                                '</pre>'
+                                            );
                                         })
                                     )
                                 );
