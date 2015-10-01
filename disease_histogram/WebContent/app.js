@@ -64,27 +64,6 @@ BSVE.init(function()
         $('h3.msg').html('There was an error processing your request. Please try again later.').show();
     }
 
-    BSVE.ui.dossierbar.create(function(status)
-    {
-        var svg = new XMLSerializer().serializeToString( $('svg')[0] ),
-        canvas = document.createElement('canvas'),
-        img = new Image();
-
-        canvg(canvas, svg);
-        img.src = canvas.toDataURL();
-        var item = {
-            dataSource: 'PON',
-            title: _title,
-            sourceDate: BSVE.api.dates.yymmdd(Date.now()),
-            itemDetail: {
-                statusIconType: 'Graph',
-                Description: img.outerHTML
-            }
-        }
- 
-        BSVE.api.tagItem(item, status);
-    });
-
     Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color)
     {
         return {
@@ -117,7 +96,6 @@ BSVE.init(function()
         chartData.sort(function(a, b){
             return b.y - a.y;
         });
-        console.log(chartData);
         $('#container').highcharts({
             chart: {
                 type: 'bar'
@@ -142,17 +120,20 @@ BSVE.init(function()
                             click: function () {
                                 var $output = $('<div>');
                                 $output.append(
-                                    $('<a href="#">')
+                                    $('<a class="btn btn-default" href="#">')
                                         .text('back')
                                         .click(function(){
                                             plotChart(results);
                                         }),
-                                    $('<ul>').append(
+                                    $('<div>').append(
                                         this.results.map(function(result){
-                                            return $('<li>').html(
-                                                '<pre>' +
-                                                JSON.stringify(result, 0, 2) +
-                                                '</pre>'
+                                            return $('<div class="panel panel-default">').html(
+                                                '<div class="panel-body">' +
+                                                '<a href="' + result.data.Link + '">' + result.data.Title + '</a>' +
+                                                '<br><i>Source: ' + result.data.Source + '</i>' +
+                                                '<br><i>Date: ' + new Date(result.data.Pubdate).toLocaleDateString() + '</i>' +
+                                                '<p>' + result.data.Description + '</p>' +
+                                                '</div>'
                                             );
                                         })
                                     )
