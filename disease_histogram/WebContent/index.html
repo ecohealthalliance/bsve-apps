@@ -1,36 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <meta http-equiv="pragma" content="no-cache">
-    <title>PON APP</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <style type="text/css">
-        #container {
-            width: 100%;
-            background: #FFF;
-            height: 568px;
-        }
-        h3.msg {
-            text-align: center;
-            color: #777;
-            font-weight: normal;
-            padding: 0 10px;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="pragma" content="no-cache">
+  <title>PON APP</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <style type="text/css">
+    #container {
+      width: 100%;
+      background: #FFF;
+      height: 568px;
+    }
+    h3.msg {
+      text-align: center;
+      color: #777;
+      font-weight: normal;
+      padding: 0 10px;
+    }
+    .my-nav {
+      margin: 5px;
+    }
+  </style>
 </head>
 <body>
-    <section id="search-result">
-        <h3 class="msg">Select a date range and click on the submit button to generate a pie chart representing the PON data for that date range.</h3>
-        <div id="container" style="display:none"></div>
-    </section>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script type="text/javascript" src="//code.highcharts.com/highcharts.js"></script>
-    <script type="text/javascript" src="//gabelerner.github.io/canvg/rgbcolor.js"></script>
-    <script type="text/javascript" src="//gabelerner.github.io/canvg/StackBlur.js"></script>
-    <script type="text/javascript" src="//gabelerner.github.io/canvg/canvg.js"></script>
-    <script type="text/javascript" src="//developer.bsvecosystem.net/sdk/api/BSVE.API.js"></script>
-    <script type="text/javascript" src="app.js"></script>
+  <section id="search-result">
+    <h3 class="msg">Select a date range and click on the submit button to generate a pie chart representing the PON data for that date range.</h3>
+    <div id="container" style="display:none"></div>
+  </section>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script type="text/javascript" src="//code.highcharts.com/highcharts.js"></script>
+  <script type="text/javascript" src="//gabelerner.github.io/canvg/rgbcolor.js"></script>
+  <script type="text/javascript" src="//gabelerner.github.io/canvg/StackBlur.js"></script>
+  <script type="text/javascript" src="//gabelerner.github.io/canvg/canvg.js"></script>
+  <script type="text/javascript" src="//developer.bsvecosystem.net/sdk/api/BSVE.API.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+  <script id="detail-view-template" type="text/x-handlebars-template">
+  <nav class="my-nav">
+    <a class="btn btn-default" id="back-btn" href="#">Back</a>
+  </nav>
+  <div>
+    {{#each results}}
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <a href="{{data.Link}}">{{data.Title}}</a>
+          <br><i>Source: {{data.Source}}</i>
+          <br><i>Date: {{toLocaleDateString data.Pubdate}}</i>
+          <p>{{data.Description}}</p>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+  </script>
 </body>
 </html>
