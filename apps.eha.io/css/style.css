@@ -1,0 +1,47 @@
+.eha-app-wide {
+  width: 250px;
+} 
+.eha-app-narrow {
+  width: 150px;
+} 
+.eha-logo {
+    margin: 20px auto 30px auto;
+    width: 350px;
+    height: 98px;
+    background-image: url("../images/eha-logo-2x.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 350px 98px;
+    text-indent: -9999px;
+}
+
+.card {
+  min-height: 340px;
+  background-color: white;  
+   margin-bottom: 2rem;
+}
+.card img {
+    
+    padding-bottom: 25px;
+
+    padding-top: 10px;
+    display:block;
+    margin:auto;
+   
+}
+
+body { 
+  background: #F5F5F5 !important; 
+}
+a { color: inherit;
+  text-decoration: none; 
+  }
+
+a:hover {
+ text-decoration: none; 
+}
+
+.container, .container-fluid {
+    padding-right: 1.9375rem;
+    padding-left: 1.9375rem;
+}
