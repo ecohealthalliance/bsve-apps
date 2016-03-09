@@ -1,3 +1,8 @@
+$grid-gutter-width = 15px
+$screen-sm-min = 768px
+$screen-md-min = 992px
+$screen-lg-min = 1200px
+
 body
   font-family 'Lato', sans-serif
   font-weight 300
@@ -21,9 +26,6 @@ a
   margin-top 50px
   max-width 1600px
 
-.eha-app-wide
-  width 250px
-
 .eha-app-narrow
   width 150px
 
@@ -32,7 +34,7 @@ a
   margin 20px auto 30px auto
   width 350px
   height 98px
-  background-image url("../images/eha-logo-2x.png")
+  background-image url("../images/eha-logo.svg")
   background-repeat no-repeat
   background-position 0 0
   background-size 350px 98px
@@ -43,23 +45,31 @@ a
   margin-bottom 2rem
   padding-top 1rem
   border 0
+  font-size .95em
   img
-    padding-bottom 25px
-    padding-top 10px
     display block
     margin auto
+    min-height 150px
+    max-width 80%
+    &.x-small
+      max-width 50%
+    &.small
+      max-width 65%
+    &.large
+      max-width 85%
 
 .card-block
   padding 0
 
 .card-text
-  padding 1.25em
+  padding 1.25em 1.5em
   color #666
 
 span
   display block
 
 .goto-app
+.coming-soon
   padding-top 15px
   min-height 400px
   color #444
@@ -67,6 +77,8 @@ span
   border-radius 4px
   background white
   border 1px solid #e5e5e5
+
+.goto-app
   &::before
     position absolute
     right 10px
@@ -81,6 +93,11 @@ span
     &::before
       opacity 1
 
+.no-description
+  &::before
+    right 50%
+    transform translate(0, -50%)
+
 .goto-app:hover,
 .goto-app:focus
   text-decoration none
@@ -91,7 +108,25 @@ span
 .goto-app:focus .card-text
   color #333
 
+.coming-soon
+  position relative
+  &::after
+    content 'Available soon'
+    font-family 'Lato'
+    letter-spacing .05em
+    position absolute
+    bottom 50px
+    width 100%
+    text-align center
+    color #CCC
+    text-transform uppercase
+  &:hover
+    &::after
+      color #999
+      font-weight 400
+
 .info
+.coming-soon-link
   position absolute
   min-height 1px
   bottom 1px
@@ -107,9 +142,13 @@ span
   border-bottom-left-radius 4px
   border-bottom-right-radius 4px
   font-weight 400
+.info
   &:hover
     background #f9f9f9
     color #333
+.coming-soon-link
+  &:hover
+    color #999
 
 .container,
 .container-fluid
@@ -119,3 +158,40 @@ span
 .footer
   h4
     display none
+
+// Based on Foundation's block grid system
+
+[class*="block-grid-"]
+  display block
+  margin -($grid-gutter-width / 2)
+  padding 0
+  clearfix()
+
+.block-grid-item
+  display inline
+  margin 0
+  padding ($grid-gutter-width / 2)
+  height auto
+  float left
+  list-style none
+
+block-grid($per-row)
+  & > .block-grid-item
+    width (100% / $per-row)
+    &:nth-of-type(n)
+      clear none
+    &:nth-of-type({$nth-equation}n+1)
+      clear both
+
+block-grids($size)
+  for $num in (1..12)
+    .block-grid-{$size}-{$num}
+      block-grid($num)
+
+block-grids(xs)
+@media (min-width: $screen-sm-min)
+  block-grids(sm)
+@media (min-width: $screen-md-min)
+  block-grids(md)
+@media (min-width: $screen-lg-min)
+  block-grids(lg)
