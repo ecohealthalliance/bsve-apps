@@ -26,7 +26,9 @@ gulp.task('scripts', ['clean'], function() {
 
 gulp.task('styles', ['clean'], function() {
   return gulp.src(paths.styles)
-    .pipe(stylus())
+    .pipe(stylus(
+      {compress: true}
+    ))
     .pipe(cssMin())
     .pipe(concat('styles/main.css'))
     .pipe(gulp.dest(''));

@@ -1,3 +1,8 @@
+$grid-gutter-width = 15px
+$screen-sm-min = 768px
+$screen-md-min = 992px
+$screen-lg-min = 1200px
+
 body
   font-family 'Lato', sans-serif
   font-weight 300
@@ -119,3 +124,40 @@ span
 .footer
   h4
     display none
+
+// Based on Foundation's block grid system
+
+[class*="block-grid-"]
+  display block
+  margin -($grid-gutter-width / 2)
+  padding 0
+  clearfix()
+
+.block-grid-item
+  display inline
+  margin 0
+  padding ($grid-gutter-width / 2)
+  height auto
+  float left
+  list-style none
+
+block-grid($per-row)
+  & > .block-grid-item
+    width (100% / $per-row)
+    &:nth-of-type(n)
+      clear none
+    &:nth-of-type({$nth-equation}n+1)
+      clear both
+
+block-grids($size)
+  for $num in (1..12)
+    .block-grid-{$size}-{$num}
+      block-grid($num)
+
+block-grids(xs)
+@media (min-width: $screen-sm-min)
+  block-grids(sm)
+@media (min-width: $screen-md-min)
+  block-grids(md)
+@media (min-width: $screen-lg-min)
+  block-grids(lg)
