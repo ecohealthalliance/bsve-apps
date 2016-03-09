@@ -1,0 +1,72 @@
+doctype html
+html
+  head
+    title EHA App Dashboard
+    meta(charset='UTF-8')
+    meta(name='description', content='A suite of applications developed by EcoHealth Alliance which aid in disease forecasting and data analysis.')
+    meta(name='keywords', content='disease forecasting, data analysis, threat, annotation')
+    link(rel='shortcut icon', type='image/x-icon', href='favicon.ico')
+    link(rel='stylesheet', href='styles/main.css')
+    script(src='scripts/main.js')
+    link(href='//fonts.googleapis.com/css?family=Lato:300,400', rel='stylesheet', type='text/css')
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-54918272-4', 'auto');
+      ga('send', 'pageview');
+  body
+    .container-fluid.eha-apps-container
+      .row
+        .col-sm-12.col-md-6.col-lg-4
+          .card.card-block
+            a.goto-app(href='https://grits-dev.ecohealthalliance.org/')
+              img.card-img-top.eha-app-wide(src='images/grits-logo.png', alt='GRITS')
+              span.card-text
+                | A natural language processing and analysis tool that annotates epidemiological information in unstructured text sources and diagnosis diseases and extracts locations.
+            a.info(href='documents/GRITS-info.pdf') Detailed description
+            
+        .col-sm-12.col-md-6.col-lg-4
+          .card.card-block
+            a.goto-app(href='http://flirt.eha.io/')
+              img.card-img-top.eha-app-narrow(src='images/flirt-logo.png', alt='Flirt')
+              span.card-text
+                | Network analysis tool that enables users to examine flight networks to identify where infected travelers and contaminated goods are likely to travel too. Connectedness between airports using passenger, cargo, and network data is calculated.
+            a.info(href='documents/FLIRT-info.pdf') Detailed description
+            
+        .col-sm-12.col-md-6.col-lg-4
+          .card.card-block
+            a.goto-app(href='http://eha.tater.io/')
+              img.card-img-top.eha-app-narrow(src='images/tater.png', alt='Tater')
+              span.card-text
+                | An easy to use annotation app that allows users to code, analyze and cross-analyze, store, and export text data. An easy to use annotation app that allows users to code, analyze and cross-analyze, store, and export text data.
+            a.info(href='documents/Tater-info.pdf') Detailed description
+            
+        .col-sm-12.col-md-6.col-lg-4
+          .card.card-block
+            a.goto-app(href='https://grits-dev.ecohealthalliance.org/new?compact=true&bsveAccessKey=loremipsumhello714902&hideBackButton=true')
+              img.card-img-top.eha-app-narrow(src='images/grits-embed.png', alt='GRITS Embedded')
+              span.card-text
+                | GRITS Application for embedded applications such as the BSVE. Features a streamlined interface and disease classification capabilities as well as geoname resolution.
+            a.info(href='documents/GRITS-info.pdf') Detailed description
+            
+        .col-sm-12.col-md-6.col-lg-4
+          .card.card-block
+            a.goto-app(href='https://mantle.io/grrs')
+              img.card-img-top.eha-app-wide(src='images/mantle-logo.png', alt='Mantle')
+              span.card-text
+                | The Global Ranavirus Reporting System allows you to create and manage records for Ranavirus studies and reports, import and export data, view tables and maps of reports, and leave reviews and comments on reports.
+            a.info(href='documents/GRRS-info.pdf') Detailed description
+            
+        .col-sm-12.col-md-6.col-lg-4
+          .card.card-block
+            a.goto-app(href='https://eidr.ecohealthalliance.org')
+              img.card-img-top.eha-app-narrow(src='images/eidr-logo.png', alt='EIDR')
+              span.card-text
+                | EIDR is dedicated to exploring the origins of Emerging Infectious Diseases (EIDs). EIDR contains events that represent the earliest known emergence of EIDs, spanning 1940-2013.
+            a.info(href='documents/EIDR-info.pdf') Detailed description
+            
+    .featured.footer
+      a.eha-logo(href='http://ecohealthalliance.org')
+      h4 EcoHealth Alliance
