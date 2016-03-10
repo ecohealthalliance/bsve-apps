@@ -1,0 +1,10 @@
+
+-create-manifest:
+
+-create-war:
+      [war] Building war: /Users/brocka/code/eha/bsve-apps/TATER/dist/TATER.war
+
+build:
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
