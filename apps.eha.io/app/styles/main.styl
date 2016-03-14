@@ -2,6 +2,7 @@ $grid-gutter-width = 15px
 $screen-sm-min = 768px
 $screen-md-min = 992px
 $screen-lg-min = 1200px
+$apps = flirt tater spa birt grits grits-embed grrs eidr
 
 body
   font-family 'Lato', sans-serif
@@ -46,17 +47,23 @@ a
   padding-top 1rem
   border 0
   font-size .95em
-  img
+  h2
+    display none
+  .logo
     display block
     margin auto
     min-height 150px
     max-width 80%
+    background-size cover
     &.x-small
       max-width 50%
     &.small
       max-width 65%
     &.large
       max-width 85%
+  for $app in $apps
+    .{$app}
+      background url('../images/' + $app + '-logo.svg') no-repeat center center
 
 .card-block
   padding 0
