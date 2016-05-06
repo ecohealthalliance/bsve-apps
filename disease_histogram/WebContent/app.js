@@ -1,7 +1,11 @@
 BSVE.init(function()
 {
-    var reqId = null,
-        _title;
+    Handlebars.registerHelper('toLocaleDateString', function(date) {
+        return (new Date(parseInt(date, 10))).toLocaleDateString();
+    });
+    var detailViewTemplate = Handlebars.compile(
+        $("#detail-view-template").html()
+    );
 
     BSVE.api.search.submit(function(query)
     {
@@ -24,66 +28,19 @@ BSVE.init(function()
         }
         $.ajax({
             method: "POST",
-            url: "https://grits-dev.ecohealth.io/api/v1/bsve/search",
+            url: "https://grits-dev.ecohealthalliance.org/api/v1/bsve/search",
             data: JSON.stringify(params)
-        }).then(function(resp){
+        }).done(function(resp){
+            if(resp.results.length === 0) {
+                return $('h3.msg').html('No results found for this query. Please try another query').show();
+            }
             plotChart(resp.results);
             $('h3.msg').hide();
             $('#container').fadeIn();
+        }).fail(function(resp){
+            $('h3.msg').html('There was an error processing your request. Please try again later.').show();
         });
     }, false, false, false);
-
-    function onComplete(response)
-    {
-        if ( response.status == 0 )
-        {
-            setTimeout(function(){ BSVE.api.datasource.result(reqId, onComplete, onError); }, 500);
-        }
-        else if (response.status == -1)
-        {
-            onError(response);
-        }
-        else
-        {
-            var _ponResults = response.result;
-            if ( _ponResults.length )
-            {
-                plotChart(_ponResults);
-                $('h3.msg').hide();
-                $('#container').fadeIn();
-            }
-            else
-            {
-                $('h3.msg').html('No results found for this query. Please try another query').show();
-            }
-        }
-    }
-
-    function onError(response)
-    {
-        $('h3.msg').html('There was an error processing your request. Please try again later.').show();
-    }
-
-    BSVE.ui.dossierbar.create(function(status)
-    {
-        var svg = new XMLSerializer().serializeToString( $('svg')[0] ),
-        canvas = document.createElement('canvas'),
-        img = new Image();
-
-        canvg(canvas, svg);
-        img.src = canvas.toDataURL();
-        var item = {
-            dataSource: 'PON',
-            title: _title,
-            sourceDate: BSVE.api.dates.yymmdd(Date.now()),
-            itemDetail: {
-                statusIconType: 'Graph',
-                Description: img.outerHTML
-            }
-        }
- 
-        BSVE.api.tagItem(item, status);
-    });
 
     Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color)
     {
@@ -117,7 +74,6 @@ BSVE.init(function()
         chartData.sort(function(a, b){
             return b.y - a.y;
         });
-        console.log(chartData);
         $('#container').highcharts({
             chart: {
                 type: 'bar'
@@ -140,24 +96,16 @@ BSVE.init(function()
                     point: {
                         events: {
                             click: function () {
-                                var $output = $('<div>');
-                                $output.append(
-                                    $('<a href="#">')
-                                        .text('back')
-                                        .click(function(){
-                                            plotChart(results);
-                                        }),
-                                    $('<ul>').append(
-                                        this.results.map(function(result){
-                                            return $('<li>').html(
-                                                '<pre>' +
-                                                JSON.stringify(result, 0, 2) +
-                                                '</pre>'
-                                            );
-                                        })
-                                    )
+                                $('#container').html(
+                                    detailViewTemplate({
+                                        results: this.results
+                                    })
                                 );
-                                $('#container').html($output);
+                                $('#container')
+                                    .find("#back-btn")
+                                    .click(function(){
+                                        plotChart(results);
+                                    });
                             }
                         }
                     }
