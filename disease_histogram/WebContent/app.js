@@ -22,15 +22,16 @@ BSVE.init(function()
                 };
             });
         }
+        $('h3.msg').html('Analyzing search results...').show();
         $.ajax({
             method: "POST",
-            url: "https://grits-dev.ecohealth.io/api/v1/bsve/search",
+            url: "https://grits-dev.ecohealthalliance.org/api/v1/bsve/search_and_diagnose",
             data: JSON.stringify(params)
         }).then(function(resp){
             plotChart(resp.results);
             $('h3.msg').hide();
             $('#container').fadeIn();
-        });
+        }).fail(onError);
     }, false, false, false);
 
     function onComplete(response)
@@ -101,9 +102,10 @@ BSVE.init(function()
         var resultsByClass = {};
         for ( var i = 0; i < results.length; i++ ) {
             var result = results[i];
-            var classification = result.data.What;
-            if(classification) {
-                resultsByClass[classification] = (resultsByClass[classification] || []).concat([result]);
+            if(result.diagnosis && result.diagnosis.diseases) {
+                result.diagnosis.diseases.forEach(function(disease){
+                    resultsByClass[disease.name] = (resultsByClass[disease.name] || []).concat([result]);
+                });
             }
         }
         var chartData = [];
@@ -117,13 +119,21 @@ BSVE.init(function()
         chartData.sort(function(a, b){
             return b.y - a.y;
         });
-        console.log(chartData);
-        $('#container').highcharts({
+        var $content = $('<div>');
+        $content.append(
+            $('<div id="chart">')
+        );
+        $('#container').html($content);
+        $('#chart').highcharts({
             chart: {
                 type: 'bar'
             },
             title: {
-                text: 'Disease Classifications'
+                text: 'GRITS Disease Classifications'
+            },
+            subtitle: {
+                text: 'This shows classifications for the first 200 search results.<br/>'+
+                    'Articles may have multiple classifications.'
             },
             xAxis: {
                 categories: chartData.map(function(item){ return item.name; })
@@ -140,19 +150,23 @@ BSVE.init(function()
                     point: {
                         events: {
                             click: function () {
-                                var $output = $('<div>');
+                                var $output = $('<div id="results">');
                                 $output.append(
-                                    $('<a href="#">')
-                                        .text('back')
-                                        .click(function(){
-                                            plotChart(results);
-                                        }),
+                                    $('<p>').append(
+                                        $('<a href="#">')
+                                            .text('Go back to histogram')
+                                            .click(function(){
+                                                plotChart(results);
+                                            })
+                                    ),
+                                    $('<h3>').text(this.name + ' Articles'),
+                                    '<hr>',
                                     $('<ul>').append(
                                         this.results.map(function(result){
                                             return $('<li>').html(
-                                                '<pre>' +
-                                                JSON.stringify(result, 0, 2) +
-                                                '</pre>'
+                                                '<a href="'+ result.data.Link + '" target="_blank">' +
+                                                result.data.Title +
+                                                '</a>'
                                             );
                                         })
                                     )
