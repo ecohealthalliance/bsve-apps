@@ -1,3 +1,4 @@
+var GRITS_URL = "https://grits.eha.io";
 BSVE.init(function()
 {
     var reqId = null,
@@ -25,7 +26,7 @@ BSVE.init(function()
         $('h3.msg').html('Analyzing search results...').show();
         $.ajax({
             method: "POST",
-            url: "https://grits-dev.ecohealthalliance.org/api/v1/bsve/search_and_diagnose",
+            url: GRITS_URL + "/api/v1/bsve/search_and_diagnose",
             data: JSON.stringify(params)
         }).then(function(resp){
             plotChart(resp.results);
