@@ -18,7 +18,7 @@ html
       ga('send', 'pageview');
   body
     .container-fluid.eha-apps-container
-      .row.block-grid-lg-4.block-grid-md-3.block-grid-sm-2
+      .row.block-grid-lg-3.block-grid-md-3.block-grid-sm-2
 
         .block-grid-item
           .card.card-block
@@ -40,6 +40,15 @@ html
 
         .block-grid-item
           .card.card-block
+            .coming-soon
+              h2 Good Question
+              .logo.small(class='good-question')
+              span.card-text
+                | Mobile surveys at the right time, right place.
+              a.coming-soon-link Detailed description available soon
+
+        .block-grid-item
+          .card.card-block
             a.goto-app(href='http://spa.eha.io')
               .logo.small(class='spa')
               span.card-text
@@ -49,20 +58,20 @@ html
         .block-grid-item
           .card.card-block
             .coming-soon
-              h2 BIRT
-              .logo(class='birt')
+              h2 NIAM (Novel Infectious Agent Monitor)
+              .logo.x-small(class='niam')
               span.card-text
-                | Bird ecological network tool that enables users to examine bird migration information over time.
-              a.coming-soon-link Detailed description available soon
+                | Novel Infectious Agent Monitor highlights and discovers newly trending infectious diseases within ProMED mail posts using an advanced algorithm that analyzes historical data and disease mentions.
+            a.coming-soon-link Detailed description available soon
 
         .block-grid-item
           .card.card-block
             a.goto-app(href='https://grits-dev.ecohealthalliance.org/')
-              h2 NIAM (Novel Infectious Agent Monitor)
-              .logo.x-small(class='niam')
+              h2 GRITS (Global Rapid Identification Tool System)
+              .logo.x-small(class='grits')
               span.card-text
                 | A natural language processing and analysis tool that annotates epidemiological information in unstructured text sources, diagnoses diseases and extracts locations.
-            a.coming-soon-link Detailed description available soon
+            a.info(href='documents/GRITS-info.pdf') Detailed description
 
         .block-grid-item
           .card.card-block
@@ -92,5 +101,6 @@ html
             a.info(href='documents/EIDR-info.pdf') Detailed description
 
     .featured.footer
+      a.contact(href='mailto:')
       a.eha-logo(href='http://ecohealthalliance.org')
       h4 EcoHealth Alliance
