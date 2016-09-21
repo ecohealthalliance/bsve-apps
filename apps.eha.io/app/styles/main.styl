@@ -154,8 +154,9 @@ span
     background #f9f9f9
     color #333
 .coming-soon-link
+  color #CCC
   &:hover
-    color #999
+    color #CCC
 
 .container,
 .container-fluid
@@ -179,7 +180,6 @@ span
   margin 0
   padding ($grid-gutter-width / 2)
   height auto
-  float left
   list-style none
 
 block-grid($per-row)
@@ -191,11 +191,15 @@ block-grid($per-row)
       clear both
 
 block-grids($size)
+  if match('sm', $size)
+    .block-grid-item
+      float left
   for $num in (1..12)
     .block-grid-{$size}-{$num}
       block-grid($num)
 
 block-grids(xs)
+
 @media (min-width: $screen-sm-min)
   block-grids(sm)
 @media (min-width: $screen-md-min)
