@@ -1,37 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <meta http-equiv="pragma" content="no-cache">
-  <title>TATER</title>
   <style type="text/css">
-    #container{
+    iframe {
       width: 100%;
-      background: #FFF;
-      padding: 10px;
+      height: 537px;
+      border: none;
     }
-    #container h4 {
-      border-bottom: 1px solid #DADADA;
-      padding-bottom: 5px;
-    }
-    #container p {
-      font-size: 12px;
-    }
-    h3.msg {
-      text-align: center;
-      color: #777;
-      font-weight: normal;
-      padding: 0 10px;
-    }
-    #grits {
-      width: 1240px;
-      height: 1212px;
-    }
-
   </style>
 </head>
-<body>
-  <iframe name="grits" id="grits" src="//spa.eha.io"></iframe>
-</body>
+  <iframe></iframe>
+  <script type="text/javascript" src="https://developer.bsvecosystem.net/sdk/api/BSVE.API.js"></script>
+  <script>
+  var IFRAME_URL = "https://spa.eha.io";
+  var iframe = document.querySelector('iframe');
+  iframe.src = IFRAME_URL;
+  BSVE.init(function(){
+    BSVE.ui.dossierbar.create(function(status, ctx){
+      iframe.contentWindow.postMessage(JSON.stringify({type: "screenCapture"}), "*");
+      var screenCapturePromise = new Promise(function(resolve){
+        window.addEventListener("message", function handler(event){
+          if(event.origin !== IFRAME_URL) return;
+          try {
+            var message = JSON.parse(event.data);
+            if(message.screenCapture) {
+              resolve(message);
+              window.removeEventListener("message", handler);
+            }
+          } catch(e) {
+            return;
+          }
+        }, false);
+      });
+      screenCapturePromise.then(function(message){
+        BSVE.api.tagItem({
+          title: message.title,
+          dataSource: "Novel Infectious Agent Monitor;ProMED-mail",
+          sourceDate: (new Date()).toISOString().split("T")[0],
+          itemDetail: {
+            statusIconType: "Text",
+            Description: '<img src="' + message.screenCapture + '"/><br /><a target="_blank" href="' + message.url + '">Link</a>'
+          }
+        }, status, function(result){
+          console.log("done", result);
+        });
+      });
+    });
+  });
+  </script>
 </html>
