@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style type="text/css">
+    iframe {
+      width: 100%;
+      height: 537px;
+      border: none;
+    }
+  </style>
+</head>
+  <iframe></iframe>
+  <script type="text/javascript" src="https://developer.bsvecosystem.net/sdk/api/BSVE.API.js"></script>
+  <script>
+  var IFRAME_URL = "https://eidr-connect.eha.io/";
+  var iframe = document.querySelector('iframe');
+  
+  iframe.src = IFRAME_URL;
+  BSVE.init(function(){
+    var userName  = BSVE.api.user();
+    BSVE.ui.dossierbar.create(function(status, ctx){
+      iframe.contentWindow.postMessage(JSON.stringify({type: "screenCapture"}), "*");
+      var screenCapturePromise = new Promise(function(resolve){
+        window.addEventListener("message", function handler(event){
+          if(event.origin !== IFRAME_URL) return;
+          try {
+            var message = JSON.parse(event.data);
+            if(message.screenCapture) {
+              resolve(message);
+              window.removeEventListener("message", handler);
+            }
+          } catch(e) {
+            return;
+          }
+        }, false);
+      });
+      screenCapturePromise.then(function(message){
+        BSVE.api.tagItem({
+          title: message.title,
+          dataSource: "Novel Infectious Agent Monitor;ProMED-mail",
+          sourceDate: (new Date()).toISOString().split("T")[0],
+          itemDetail: {
+            statusIconType: "Text",
+            Description: '<img src="' + message.screenCapture + '"/><br /><a target="_blank" href="' + message.url + '">Link</a>'
+          }
+        }, status, function(result){
+          console.log("done", result);
+        });
+      });
+    });
+  });
+  </script>
+</html>
