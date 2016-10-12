@@ -13,7 +13,7 @@
   <iframe></iframe>
   <script type="text/javascript" src="https://developer.bsvecosystem.net/sdk/api/BSVE.API.js"></script>
   <script>
-  var IFRAME_URL = "https://eidr-connect.eha.io/";
+  var IFRAME_URL = "https://eidr-connect.eha.io";
   var iframe = document.querySelector('iframe');
   
   iframe.src = IFRAME_URL;
@@ -38,7 +38,7 @@
       screenCapturePromise.then(function(message){
         BSVE.api.tagItem({
           title: message.title,
-          dataSource: "Novel Infectious Agent Monitor;ProMED-mail",
+          dataSource: "EIDR-Connect;ProMED-mail",
           sourceDate: (new Date()).toISOString().split("T")[0],
           itemDetail: {
             statusIconType: "Text",
