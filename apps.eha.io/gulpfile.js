@@ -1,11 +1,14 @@
-var gulp = require('gulp'),
-    jade = require('gulp-jade'),
-    stylus = require('gulp-stylus'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    cssMin = require('gulp-minify-css'),
-    del = require('del'),
-    webserver = require('gulp-webserver');
+
+var gulp           = require('gulp'),
+    jade           = require('gulp-jade'),
+    stylus         = require('gulp-stylus'),
+    concat         = require('gulp-concat'),
+    uglify         = require('gulp-uglify'),
+    cssMin         = require('gulp-minify-css'),
+    del            = require('del'),
+    webserver      = require('gulp-webserver'),
+    s3             = require('gulp-s3-deploy'),
+    awsCredentials = require('./aws_credentials.js');
 
 var paths = {
   scripts: 'app/scripts/**/*.js',
@@ -43,12 +46,12 @@ gulp.task('html', ['clean'], function() {
 });
 
 gulp.task('images', ['clean'], function () {
-  gulp.src(paths.images)
+  return gulp.src(paths.images)
     .pipe(gulp.dest('./dist/images/'));
 });
 
 gulp.task('docs', function () {
-  gulp.src(paths.docs)
+  return gulp.src(paths.docs)
     .pipe(gulp.dest('./dist/documents/'));
 });
 
@@ -58,9 +61,16 @@ gulp.task('watch', function() {
   gulp.watch(paths.html, ['html']);
 });
 
-gulp.task('webserver', function() {
-  gulp.src('dist')
+gulp.task('serve', function() {
+  return gulp.src('dist')
     .pipe(webserver({livereload: true}));
 });
 
-gulp.task('default', ['webserver', 'watch', 'scripts', 'html', 'styles', 'images', 'docs']);
+gulp.task('build', ['scripts', 'html', 'styles', 'images', 'docs']);
+
+gulp.task('deploy', ['build'], function() {
+  return gulp.src('./dist/**')
+    .pipe(s3(awsCredentials));
+});
+
+gulp.task('default', ['serve', 'watch', 'build']);

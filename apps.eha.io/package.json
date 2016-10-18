@@ -15,7 +15,9 @@
     "gulp-uglify": "^1.5.3",
     "gulp-webserver": "^0.9.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp-s3-deploy": "^1.0.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
