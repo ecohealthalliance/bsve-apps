@@ -1,4 +1,4 @@
-var GRITS_URL = "https://grits.eha.io";
+var GRITS_URL = "https://grits.bsvecosystem.net";
 BSVE.init(function()
 {
     var reqId = null,
@@ -23,6 +23,7 @@ BSVE.init(function()
                 };
             });
         }
+        params.auth_ticket = BSVE.api.authTicket();
         $('h3.msg').html('Analyzing search results...').show();
         $.ajax({
             method: "POST",
@@ -75,7 +76,7 @@ BSVE.init(function()
         canvg(canvas, svg);
         img.src = canvas.toDataURL();
         var item = {
-            dataSource: 'PON',
+            dataSource: 'GRITS',
             title: _title,
             sourceDate: BSVE.api.dates.yymmdd(Date.now()),
             itemDetail: {
