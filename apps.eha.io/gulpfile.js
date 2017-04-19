@@ -59,6 +59,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.scripts, ['scripts']);
   gulp.watch(paths.styles, ['styles']);
   gulp.watch(paths.html, ['html']);
+  gulp.watch(paths.images, ['images']);
 });
 
 gulp.task('serve', function() {
