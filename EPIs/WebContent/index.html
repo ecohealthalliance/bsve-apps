@@ -32,15 +32,15 @@
         <div class="row">
             <div class="col">
                 <label>Origin Airport</label>
-                <input type="text" id="origin" />
+                <input type="text" id="origin" class="typeahead" value="SFO" />
             </div>
             <div class="col">
                 <label>Destination Airport</label>
-                <input type="text" id="destination" />
+                <input type="text" id="destination" class="typeahead" value="JFK" />
             </div>
             <div class="col">
                 <label>Year</label>
-                <select>
+                <select id="year">
                     <option>2010</option>
                     <option>2011</option>
                     <option>2012</option>
@@ -48,7 +48,9 @@
                     <option>2014</option>
                     <option>2015</option>
                     <option>2016</option>
-                    <option>2017</option>
+                    <option selected="true">2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
                 </select>
             </div>
         </div>
@@ -63,11 +65,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
     <!-- Latest compiled and minified JavaScript -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <!-- Latest compiled and minified Locales -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="bootstrap-typeahead.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
 </body>
 </html>
