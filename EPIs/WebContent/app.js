@@ -30,8 +30,14 @@ function initApp()
             } ]
           })
     getAirports()
-    $(".typeahead").change(function(){
-      console.log("Change!")
+    $(".typeahead").keyup(function(){
+      if($(this).is(':input') && $(this).val().length > 0 && $(this).val().length < 3){
+        console.log("skip updating data", $(this).val().length)
+        return
+      }
+      fetchData()
+    })
+    $("#year").change(function(){
       fetchData()
     })
   })
@@ -61,8 +67,8 @@ function getAirports()
 
 function buildFilter()
 {
-  var origin = $("#origin").val()
-  var dest = $("#destination").val()
+  var origin = $("#origin").val().toUpperCase()
+  var dest = $("#destination").val().toUpperCase()
   var year = $("#year :selected").text()
   var filter = []
   if(origin){
