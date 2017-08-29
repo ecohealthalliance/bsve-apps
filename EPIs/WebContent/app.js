@@ -3,6 +3,26 @@ BSVE.init(initApp);
 var user = null,
   authTicket = null,
   dataSource = null
+$(function(){
+  $('#table').bootstrapTable({
+          columns: [{
+              field: 'source',
+              title: 'Origin'
+          }, {
+              field: 'destination',
+              title: 'Destination'
+          }, {
+              field: 'flightyear',
+              title: 'Year'
+          }, {
+              field: 'flightcount',
+              title: 'Flight Count'
+          }, {
+              field: 'passengercount',
+              title: 'Passenger Count'
+          } ]
+        })
+})
 
 function initApp()
 {
@@ -10,36 +30,16 @@ function initApp()
   user = BSVE.api.userData();
   fetchData();
 
-  $(function(){
-    $('#table').bootstrapTable({
-            columns: [{
-                field: 'source',
-                title: 'Origin'
-            }, {
-                field: 'destination',
-                title: 'Destination'
-            }, {
-                field: 'flightyear',
-                title: 'Year'
-            }, {
-                field: 'flightcount',
-                title: 'Flight Count'
-            }, {
-                field: 'passengercount',
-                title: 'Passenger Count'
-            } ]
-          })
-    getAirports()
-    $(".typeahead").keyup(function(){
-      if($(this).is(':input') && $(this).val().length > 0 && $(this).val().length < 3){
-        console.log("skip updating data", $(this).val().length)
-        return
-      }
-      fetchData()
-    })
-    $("#year").change(function(){
-      fetchData()
-    })
+  getAirports()
+  $(".typeahead").keyup(function(){
+    if($(this).is(':input') && $(this).val().length > 0 && $(this).val().length < 3){
+      console.log("skip updating data", $(this).val().length)
+      return
+    }
+    fetchData()
+  })
+  $("#year").change(function(){
+    fetchData()
   })
 }
 
