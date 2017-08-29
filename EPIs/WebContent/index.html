@@ -23,14 +23,16 @@
 
       <nav>
         <ul>
-          <li class="active">
+          <li class="active flirt">
             <a href="#">FLIRT</a>
+          </li>
+          <li class="hotspots">
+            <a href="#">HotSpots</a>
           </li>
         </ul>
       </nav>
     </header>
-
-    <main>
+    <main id="flirt" class="pane">
       <section class="options">
         <div class="form-group">
           <label for="origin">Origin Airport</label>
@@ -62,7 +64,9 @@
       </section>
 
     </main>
-
+    <main id="hotspots" class="pane">
+        <h3>HotSpots stuff!</h3>
+    </main>
     <script type="text/javascript" src="jquery.min.js"></script>
     <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
     <script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>
@@ -70,6 +74,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <script type="text/javascript" src="bootstrap-typeahead.min.js"></script>
+    <script type="text/javascript" src="//developer.bsvecosystem.net/sdk/api/BSVE.API.js" ></script>
     <script type="text/javascript" src="app.js"></script>
 
   </body>
