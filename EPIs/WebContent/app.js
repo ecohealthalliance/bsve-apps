@@ -7,17 +7,14 @@ BSVE.init(initApp);
 var user = null,
   authTicket = "apikey=AK9dc4549a-2f2f-4f96-9a0b-a614fded12cb;timestamp=1503411781906;nonce=915077438;signature=d11e2435e0d230b6c450f5883e5363b3b42c7a04",
   dataSource = null
-$(function(){
-  $("nav li.flirt").click(function(){
-    $("nav li").toggleClass("active")
-    $("#hotpots").hide()
-    $("#flirt").show()
-  });
 
-  $("nav li.hotspots").click(function(){
-    $("nav li").toggleClass("active")
-    $("#hotpots").show()
-    $("#flirt").hide()
+$(function(){
+  $("nav li").click(function(event){
+    var tab = event.target.id;
+    $('nav li a').removeClass('active');
+    $('nav li a#' + tab).addClass('active');
+    $('main').removeClass('active');
+    $('main#' + tab.replace(/-tab/, '')).addClass('active');
   });
 
   $('#table').bootstrapTable({

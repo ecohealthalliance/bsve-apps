@@ -1,8 +1,8 @@
-body {
+.epis {
   font-family: 'Open Sans', sans-serif;
 }
 
-header {
+.header {
   display: flex;
   border-bottom: 2px solid #CCC;
   margin-bottom: 2em;
@@ -26,38 +26,53 @@ header {
   display: inline-block;
 }
 
-nav {
+@media(max-width: 500px) {
+  .app-title h2{
+    display: none;
+  }
+}
+
+.main-nav {
   margin-left: auto;
   display: flex;
   align-items: stretch;
 }
 
-nav > ul {
+.main-nav > ul {
   display: flex;
   margin-bottom: 0;
   align-items: stretch;
 }
 
-nav > ul > li {
+.main-nav > ul > li {
   display: flex;
   justify-content: center;
   align-items: stretch;
   cursor: pointer;
 }
 
-nav > ul > li a {
+.main-nav > ul > li a {
   display: flex;
   align-items: center;
   padding: 0 1em;
   text-transform: uppercase;
   font-weight: 300;
-  font-size: 1em;
+  font-size: 1.25em;
   text-align: center;
+  font-weight: bold;
+}
+
+.main-nav > ul > li a.active {
+  background: #EEEEEE;
 }
 
 main {
   margin-left: 3%;
   margin-right: 3%;
+}
+
+main:not(.active) {
+  display: none;
 }
 
 .options {
@@ -66,11 +81,32 @@ main {
 
 .options div {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-content: center;
   margin-right: 1em;
 }
 
 .options div:last-of-type {
   margin-right: 0;
+}
+
+.options input[type=text] {
+  flex: 1;
+  width: auto;
+  max-width: 100%;
+}
+
+.options input[type=text]:focus,
+.options select:focus {
+  outline: none;
+  border-color: #333;
+  box-shadow: none;
+}
+
+.options label {
+  font-weight: bold;
 }
 
 label {

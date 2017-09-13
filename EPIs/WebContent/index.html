@@ -7,7 +7,6 @@
       <meta http-equiv="pragma" content="no-cache">
       <title>EHA Programing Interfaces</title>
       <!-- Latest compiled and minified CSS -->
-      <script type="text/javascript" src="//developer.bsvecosystem.net/sdk/api/BSVE.API.js" async></script>
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -21,18 +20,18 @@
         <h2>EHA Programming Interfaces</h2>
       </div>
 
-      <nav>
-        <ul>
-          <li class="active flirt">
-            <a href="#">FLIRT</a>
+      <nav class="main-nav">
+        <ul class="nav">
+          <li>
+            <a href="#" id="flirt-tab" class="active">FLIRT</a>
           </li>
-          <li class="hotspots">
-            <a href="#">HotSpots</a>
+          <li>
+            <a href="#" id="hotspots-tab">HotSpots</a>
           </li>
         </ul>
       </nav>
     </header>
-    <main id="flirt" class="pane">
+    <main id="flirt" class="active pane">
       <section class="options">
         <div class="form-group">
           <label for="origin">Origin Airport</label>
@@ -64,9 +63,12 @@
       </section>
 
     </main>
+
     <main id="hotspots" class="pane">
         <h3>HotSpots stuff!</h3>
     </main>
+
+    <script type="text/javascript" src="//developer.bsvecosystem.net/sdk/api/BSVE.API.js"></script>
     <script type="text/javascript" src="jquery.min.js"></script>
     <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
     <script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>
