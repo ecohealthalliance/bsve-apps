@@ -7,7 +7,7 @@ $apps = flirt tater spa birt grits grits-embed grrs eidr niam good-question eidr
 body
   font-family 'Lato', sans-serif
   font-weight 300
-  background #F5F5F5 !important
+  background #ececec !important
 
 a
   color inherit
@@ -197,6 +197,17 @@ block-grids($size)
   for $num in (1..12)
     .block-grid-{$size}-{$num}
       block-grid($num)
+hr
+  margin-top: 1rem
+  margin-bottom: 1rem
+  border: 0
+  border-top: 1px solid rgba(0, 0, 0, 0.1)
+
+nav-header
+  margin-left: 100px
+
+.retired
+  background #F3F3F3
 
 block-grids(xs)
 

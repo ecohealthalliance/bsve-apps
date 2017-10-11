@@ -17,9 +17,12 @@ html
       ga('create', 'UA-54918272-4', 'auto');
       ga('send', 'pageview');
   body
+    hr
+    div.navbar.navbar-light.bg-light
+      a.navbar-brand.nav-header(href="#") Applications
+
     .container-fluid.eha-apps-container
       .row.block-grid-lg-3.block-grid-md-3.block-grid-sm-2
-
         .block-grid-item
           .card.card-block
             a.goto-app(href='https://grits.eha.io')
@@ -46,60 +49,67 @@ html
               span.card-text
                 | EIDR Connect is a centralized web platform dedicated to tracking Emerging Infectious Diseases (EIDs). Through EIDR Connect, ongoing EID events can be curated by experts compared and individual emergence events can be explored in depth.
             .coming-soon-link(title="Detailed description coming soon") Detailed description
+    hr
+    div.navbar.navbar-light.bg-light
+      a.navbar-brand.nav-header(href="#") Legacy Applications
 
+    .container-fluid.eha-apps-container
+      .row.block-grid-lg-3.block-grid-md-3.block-grid-sm-2
         .block-grid-item
           .card.card-block
-            a.goto-app(href='https://eidr.ecohealthalliance.org')
+            div.goto-app.retired
               h2 EIDR: Emerging Infectious Diseases Repository
               .logo.x-small(class='eidr')
               span.card-text
                 | EIDR is dedicated to exploring the origins of Emerging Infectious Diseases (EIDs). EIDR contains events that represent the earliest known emergence of EIDs, spanning from 1940 to 2013.
-            a.info(href='documents/EIDR-info.pdf') Detailed description
+            a.info.retired(href='documents/EIDR-info.pdf') Whitepaper
 
         .block-grid-item
           .card.card-block
-            a.goto-app(href='http://niam.eha.io')
+            div.goto-app.retired
               h2 NIAM (Novel Infectious Agent Monitor)
               .logo.x-small(class='niam')
               span.card-text
                 | Novel Infectious Agent Monitor highlights and discovers newly trending infectious diseases within ProMED mail posts using an advanced algorithm that analyzes historical data and disease mentions.
-            a.info(href='documents/NIAM-info.pdf') Detailed description
+            a.info.retired(href='documents/NIAM-info.pdf') Whitepaper
 
         .block-grid-item
           .card.card-block
-            a.goto-app(href='https://grits.eha.io/new?compact=true&bsveAccessKey=loremipsumhello714902&hideBackButton=true')
+            div.goto-app.retired
               h2 GRITS Embeded (Global Rapid Identification Tool System)
               .logo.large(class='grits-embed')
               span.card-text
                 | GRITS Application for embeding in ecosystems such as the BSVE. Features a streamlined interface and disease classification capabilities as well as geoname resolution.
-            a.info(href='documents/GRITS-info.pdf') Detailed description
+            a.info.retired(href='documents/GRITS-info.pdf') Whitepaper
 
 
         .block-grid-item
           .card.card-block
-            a.goto-app(href='https://spa.eha.io')
+            div.goto-app.retired
               .logo.small(class='spa')
               span.card-text
                 | A map-based application showing the number of mentions per capita of each country on ProMED-mail feeds.
-            a.info(href='documents/SPA-info.pdf') Detailed description
+            a.info.retired(href='documents/SPA-info.pdf') Whitepaper
 
         .block-grid-item
           .card.card-block
-            a.goto-app(href='http://tater.io/')
+            div.goto-app.retired
               h2 Tater
               .logo.small(class='tater')
               span.card-text
                 | An easy to use annotation application that allows users to code, analyze and cross-analyze, store, and export text data.
-            a.info(href='documents/Tater-info.pdf') Detailed description
+            a.info.retired(href='documents/Tater-info.pdf') Whitepaper
 
         .block-grid-item
           .card.card-block
-            a.goto-app(href='https://mantle.io/grrs')
+            div.goto-app.retired
               h2 Mantle
               .logo(class='grrs')
               span.card-text
                 | The Global Ranavirus Reporting System allows users to create and manage records for Ranavirus studies and reports, import and export data, view tables and maps of reports, and leave reviews and comments on reports.
-            a.info(href='documents/GRRS-info.pdf') Detailed description
+            a.info.retired(href='documents/GRRS-info.pdf') Whitepaper
+
+
 
 
     .featured.footer
